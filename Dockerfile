@@ -2,10 +2,10 @@ FROM ubuntu:16.04
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
-RUN add-apt-repository ppa:git-core/ppa && \
-    add-apt-repository ppa:openjdk-r/ppa && \
-    apt-get update && \
-    apt-get -y install wget && \
+RUN apt-get update && \
+    apt-get -y install wget software-properties-common python-software-properties && \
+    add-apt-repository ppa:git-core/ppa -y && \
+    add-apt-repository ppa:openjdk-r/ppa -y && \
     wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     apt-get update && \
     apt-get -y install \
@@ -18,8 +18,6 @@ RUN add-apt-repository ppa:git-core/ppa && \
     mc \
     ca-certificates \
     curl \
-    software-properties-common \
-    python-software-properties \
     bash-completion \ 
     git \
     subversion \
