@@ -2,7 +2,11 @@ FROM ubuntu:16.04
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
-RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
+RUN add-apt-repository ppa:git-core/ppa && \
+    add-apt-repository ppa:openjdk-r/ppa && \
+    apt-get update && \
+    apt-get -y install wget && \
+    wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     apt-get update && \
     apt-get -y install \
     locales \
@@ -10,14 +14,15 @@ RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     openssh-server \
     sudo \
     procps \
-    wget \
     unzip \
     mc \
     ca-certificates \
     curl \
     software-properties-common \
     python-software-properties \
-    bash-completion \
+    bash-completion \ 
+    git \
+    subversion \
     build-essential \
     libkrb5-dev \
     gcc \
@@ -25,6 +30,8 @@ RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     debian-keyring \
     python2.7 \
     gnupg2 \
+    openjdk-8-jdk-headless=8u171-b11-0ubuntu0.16.04.1 \
+    openjdk-8-source=8u171-b11-0ubuntu0.16.04.1 \
     nodejs && \
     mkdir /var/run/sshd && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
@@ -32,19 +39,14 @@ RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
     # Adding user to the 'root' is a workaround for https://issues.jboss.org/browse/CDK-305
     useradd -u 1000 -G users,sudo,root -d /home/user --shell /bin/bash -m user && \
     usermod -p "*" user && \
-    add-apt-repository ppa:git-core/ppa && \
-    add-apt-repository ppa:openjdk-r/ppa && \
-    apt-get update && \
-    sudo apt-get install git subversion -y && \
     apt-get clean && \
     apt-get -y autoremove && \
-    sudo apt-get install openjdk-8-jdk-headless=8u171-b11-0ubuntu0.16.04.1 openjdk-8-source=8u171-b11-0ubuntu0.16.04.1 -y && \
     sudo update-ca-certificates -f && \
     sudo sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
     gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
-    \curl -sSL https://get.rvm.io | bash -s stable && \
+    \curl -sSL https://get.rvm.io | bash -s stable --ruby && \
     sudo npm install --unsafe-perm -g yarn gulp bower grunt grunt-cli yeoman-generator yo generator-angular generator-karma generator-webapp
 
 ENV LANG en_GB.UTF-8
