@@ -14,7 +14,6 @@ RUN apt-get update && \
     git \
     subversion \
     ca-certificates \
-    update-alternatives \
     curl \
     bash-completion && \
     mkdir /var/run/sshd && \
