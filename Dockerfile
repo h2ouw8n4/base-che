@@ -54,7 +54,6 @@ RUN sudo locale-gen en_US.UTF-8 && \
     cd /home/user && ls -la && \
     sed -i 's/# store-passwords = no/store-passwords = yes/g' /home/user/.subversion/servers && \
     sed -i 's/# store-plaintext-passwords = no/store-plaintext-passwords = yes/g' /home/user/.subversion/servers
-COPY open-jdk-source-file-location /open-jdk-source-file-location
 EXPOSE 22 4403 1337 3000 4000 4200 5000 9000 8003 35729
 WORKDIR /projects
 
