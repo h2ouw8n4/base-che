@@ -58,8 +58,8 @@ RUN apt-get update && \
     debian-keyring \
     python2.7 \
     gnupg2 \
-    openjdk-8-jdk-headless=8u171-b11-0ubuntu0.16.04.1 \
-    openjdk-8-source=8u171-b11-0ubuntu0.16.04.1 \
+    openjdk-8-jdk-headless \
+    openjdk-8-source \
     nodejs && \
     mkdir /var/run/sshd && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
