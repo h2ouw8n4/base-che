@@ -34,7 +34,7 @@ RUN set -xe \
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 RUN apt-get update && \
-    apt-get -y install wget software-properties-common python-software-properties sudo && \
+    apt-get -y install wget software-properties-common sudo && \
     add-apt-repository ppa:git-core/ppa -y && \
     add-apt-repository ppa:openjdk-r/ppa -y && \
     wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
